@@ -1,9 +1,20 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import Header from "../components/Header";
 import {Box, Typography, Button} from '@mui/material';
 import AddInvoice from "../components/AddInvoice";
+import Invoices from '../components/Invoices';
+import { getAllInvoice } from "../services/api";
+
 const Home = () =>{
     const [addInvoice, setAddInvoice] = useState(false);
+    const [invoices, setInvoices] = useState([]);
+
+    useEffect (()=>{
+        const getData = async () =>{
+            const responce = await getAllInvoice();
+            setInvoices(responce.data);
+        }
+    })
 
     const toggleInvoice = () =>{
         setAddInvoice(true);
@@ -20,7 +31,10 @@ const Home = () =>{
                   onClick={()=> toggleInvoice()}
             >Add Invoice</Button>
             }
-            {addInvoice && <AddInvoice/>}
+            {addInvoice && <AddInvoice setAddInvoice={setAddInvoice} />}
+            <Box>
+                <Invoices invoices={invoices}/>
+            </Box>
         </Box>
         </>
     )
