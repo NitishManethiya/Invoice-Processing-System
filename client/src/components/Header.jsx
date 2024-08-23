@@ -1,13 +1,13 @@
 
 import { AppBar, Toolbar } from '@mui/material';
+const logoimage = require('../images/logoimg.jpg');
 
 const Header = () => {
-    const logo = "https://dashboard.getinvoice.co/dboard/img/logo.png";
     
     return (
         <AppBar position="static" color="secondary">
             <Toolbar>
-                <img src={logo} alt="logo" style={{ width: 120 }} />
+            <img src={logoimage} alt='logo' style={{width : 164}} />
             </Toolbar>
         </AppBar>
     )
