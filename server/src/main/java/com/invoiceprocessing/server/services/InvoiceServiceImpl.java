@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class InvoiceServiceimpl implements InvoiceService{
+public class InvoiceServiceImpl implements InvoiceService{
 
     @Autowired
     InvoiceDao invoiceDao;
@@ -22,5 +22,12 @@ public class InvoiceServiceimpl implements InvoiceService{
     @Override
     public List<Invoice> getInvoices() {
         return invoiceDao.findAll();
+    }
+
+    @Override
+    public Invoice deleteInvoice(long id) {
+        Invoice invoice = invoiceDao.findById(id).get();
+        invoiceDao.delete(invoice);
+        return invoice;
     }
 }

@@ -1,12 +1,16 @@
-import {AppBar, Toolbar} from '@mui/material';
-const logoimage = require('../images/logoimg.jpg');
-const Header = () =>{
+
+import { AppBar, Toolbar } from '@mui/material';
+
+const Header = () => {
+    const logo = "https://dashboard.getinvoice.co/dboard/img/logo.png";
+    
     return (
-        <AppBar color='secondary' position='static'>
+        <AppBar position="static" color="secondary">
             <Toolbar>
-                <img src={logoimage} alt='logo' style={{width : 150}} />
+                <img src={logo} alt="logo" style={{ width: 120 }} />
             </Toolbar>
         </AppBar>
     )
 }
+
 export default Header;

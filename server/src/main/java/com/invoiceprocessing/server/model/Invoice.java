@@ -16,7 +16,7 @@ public class Invoice {
     private String date;
     private String action;
 
-    public Invoice(){}
+    public Invoice() {}
 
     public Invoice(long id, String vendor, String product, int amount, String date, String action) {
         this.id = id;

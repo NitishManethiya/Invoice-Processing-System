@@ -1,8 +1,27 @@
-import { Table, TableHead, TableBody,TableRow,TableCell,Button } from "@mui/material";
 
-const Invoices = ({invoices}) =>{
-    return(
-        <Table>
+import { TableCell, Table, TableHead, TableRow, TableBody, Button, Typography, styled } from '@mui/material';
+
+const StyledTable = styled(Table)({
+    margin: 20,
+    marginTop: 40,
+    width: '80%',
+    '& > thead > tr > th': {
+        background: '#000',
+        color: '#FFFFFF',
+        fontSize: 18
+    },
+    '& > tbody > tr > td': {
+        fontSize: 16
+    },
+    '& > tbody > p': {
+        fontSize: 18,
+        marginTop: 15
+    }
+})
+
+const Invoices = ({ invoices, removeInvoice }) => {
+    return (
+        <StyledTable>
             <TableHead>
                 <TableRow>
                     <TableCell>Vendor</TableCell>
@@ -15,21 +34,23 @@ const Invoices = ({invoices}) =>{
             </TableHead>
             <TableBody>
                 {
-                    invoices.map(invoice =>(
-                        <TableRow>
-                            <TableCell>{invoice.vendor}</TableCell>
-                            <TableCell>{invoice.product}</TableCell>
-                            <TableCell>{invoice.amount}</TableCell>
-                            <TableCell>{invoice.date}</TableCell>
-                            <TableCell>{invoice.status}</TableCell>
-                            <TableCell>
-                                <Button variant="contained" color="succes">Mark Done</Button>
-                            </TableCell>
-                        </TableRow>
-                    ) )
+                    invoices && Array.isArray(invoices) && invoices.length > 0 ?
+                        invoices.map(invoice => (
+                            <TableRow key={invoice.id}>
+                                <TableCell>{invoice.vendor}</TableCell>
+                                <TableCell>{invoice.product}</TableCell>
+                                <TableCell>Rs {invoice.amount}</TableCell>
+                                <TableCell>{invoice.date}</TableCell>
+                                <TableCell>{invoice.action}</TableCell>
+                                <TableCell><Button variant="contained" color="success" onClick={() => removeInvoice(invoice.id)}>Mark Done</Button></TableCell>
+                            </TableRow>
+                        ))
+                        :
+                        <Typography>No pending invoices</Typography>
                 }
             </TableBody>
-        </Table>
+        </StyledTable>
     )
 }
+
 export default Invoices;
